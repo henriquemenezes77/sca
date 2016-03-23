@@ -21,19 +21,19 @@ public abstract class AControle {
 	 * qual tabela os dados serão persistidos é o tipo da entidade, que por sua
 	 * vez é passada como parametro nesta ação.
 	 */
-}
 
-public class AControle {
 	public void gravar(Object entidade) {
 		Session sessao = HibernateUtil.getFabrica().openSession();
 		sessao.beginTransaction();
-		sessao.saveOrUptade(entidade);
-		sessao.getTransaction();
+		sessao.saveOrUpdate(entidade);
+		sessao.getTransaction().commit();
 		sessao.close();
 	}
 
 	public List listar(Class claseEntidade) {
-		Session sessao = HibernateUtil
+		Session sessao = HibernateUtil.getFabrica().openSession();
+		List dados = sessao.createCriteria(claseEntidade).list();
+		sessao.close();
 		return dados;
 	}
 }
