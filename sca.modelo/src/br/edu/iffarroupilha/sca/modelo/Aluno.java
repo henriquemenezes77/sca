@@ -9,33 +9,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.swing.SwingWorker.StateValue;
 
 /**
- * Entidade Aluno persistida em um BD
- * 
+ * <p>
+ * Entidade aluno persistida em banco de dados
+ * </p>
  * @author Henrique
- * @since 09/03/2016
+ * @since 09/03/16
  */
 @Entity
 public class Aluno {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int matricula;
-	@Column(nullable = false, length = 50)
+	@Column(nullable=false, length=50)
 	private String nome;
-	@Column(length = 90)
+	@Column(length=100)
 	private String email;
-	@Column(length = 15)
+	@Column(length=15)
 	private String telefone;
-	@Column(nullable = false)
+	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	@ManyToOne
-	@JoinColumn(name = "idTurma")
+	@JoinColumn(name="idTurma")
 	private Turma turma;
-
+	
+	public int getMatricula() {
+		return matricula;
+	}
+	
 	public Turma getTurma() {
 		return turma;
 	}
@@ -44,44 +51,33 @@ public class Aluno {
 		this.turma = turma;
 	}
 
-	public int getMatricula() {
-		return matricula;
-	}
-
 	public void setMatricula(int matricula) {
 		this.matricula = matricula;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getTelefone() {
 		return telefone;
 	}
-
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
+	
+	
 }
